@@ -1,0 +1,24 @@
+services:
+  app:
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+    networks:
+      - proxy_apps
+    devices:
+      - /dev/dri:/dev/dri
+    image: lscr.io/linuxserver/webtop:latest
+    volumes:
+      - app_data:/config
+    shm_size: "1gb"
+    restart: unless-stopped
+
+
+networks:
+  proxy_apps:
+    name: proxy_apps
+    external: true
+
+volumes:
+  app_data:
